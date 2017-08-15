@@ -44,7 +44,7 @@ var Post = {
     },
     custom: {
         method: 'get',
-        params: '/:x',
+        params: '/:x/:y',
         handler: function(req, res) {
             return res.json(req.params);
         }
@@ -54,3 +54,11 @@ var Post = {
 module.exports = Post;
 ```
 __NAME is required field. If it is not present then entire file will get ignored.
+
+It will create following URLs:
+  * GET /api/posts : Post.index
+  * POST /api/posts : Post.create
+  * PUT /api/posts : Post.update
+  * DELETE /api/posts : Post.destroy
+  * GET /api/posts/:id : Post.read
+  * GET /api/posts/:x/:y : Post.custom
