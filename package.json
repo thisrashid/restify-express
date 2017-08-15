@@ -1,6 +1,6 @@
 {
-  "name": "express-rest",
-  "version": "0.0.1",
+  "name": "restify-express",
+  "version": "0.0.2",
   "description": "Middleware to create REST APIs on express server",
   "main": "index.js",
   "scripts": {
@@ -15,12 +15,9 @@
     "rest"
   ],
   "author": "Rashid Azar",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/thisrashid/express-rest/issues"
   },
-  "homepage": "https://github.com/thisrashid/express-rest#readme",
-  "dependencies": {
-    "lodash": "^4.17.4"
-  }
+  "homepage": "https://github.com/thisrashid/express-rest#readme"
 }

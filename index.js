@@ -3,7 +3,6 @@
  */
 
 var wrench =  require('./wrench');
-var _ = ('lodash');
 
 function RESTHandler(options) {
     this.options = options;
@@ -29,21 +28,23 @@ function RESTHandler(options) {
             params: ''
         }
     }
-    this.loadControllers(options);
+    
 
     this.loadControllers = function() {
         var self = this;
-        var controllers = __dirname + '/' + this.options.controllers;
-        readdirSyncRecursive(controllers)
+        var controllers = self.options.controllers;
+        
+        wrench(controllers)
             .filter((file) => {
                 return (/\.(js)$/i).test(file);
             }).map((file) => {
+                console.log('file: ', file);
                 const ctrl = require(controllers + '/' + file);
                 self.processController(ctrl.default ? ctrl.default : ctrl);
             });
     }
 
-    processController(ctrl) {
+    this.processController = function(ctrl) {
         var self = this;
         let app = self.options.app;
         if(!ctrl.__NAME) {
@@ -51,16 +52,21 @@ function RESTHandler(options) {
         }
         const apiPath = self.options.base + '/' + ctrl.__NAME;
         
-        _.map(ctrl, (value, key) => {
+        Object.keys(ctrl).forEach((key) => {
+            var value = ctrl[key];
             if(key.match(/^__/)) return;
 
             if(typeof value === 'function') {
+                console.log(apiPath + self.methods[key].params)
                 app[ self.methods[key].method ](apiPath + self.methods[key].params, value);
             } else if(typeof value === 'object') {
+                console.log(apiPath + value.params);
                 app[value.method.toLowerCase()](apiPath + value.params, value.handler);
             }
         });
     } 
+
+    this.loadControllers(options);
 }
 
 function restMiddleware(options) {
@@ -69,4 +75,4 @@ function restMiddleware(options) {
         next();
     }
 }
-export default restMiddleware;
+module.exports = restMiddleware;
