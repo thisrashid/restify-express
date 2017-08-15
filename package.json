@@ -1,6 +1,6 @@
 {
   "name": "restify-express",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Middleware to create REST APIs on express server",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thisrashid/express-rest.git"
+    "url": "git+https://github.com/thisrashid/restify-express.git"
   },
   "keywords": [
     "express",
@@ -17,7 +17,7 @@
   "author": "Rashid Azar",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thisrashid/express-rest/issues"
+    "url": "https://github.com/thisrashid/restify-express/issues"
   },
-  "homepage": "https://github.com/thisrashid/express-rest#readme"
+  "homepage": "https://github.com/thisrashid/restify-express#readme"
 }
