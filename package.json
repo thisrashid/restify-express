@@ -1,6 +1,6 @@
 {
   "name": "restify-express",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Middleware to create REST APIs on express server",
   "main": "index.js",
   "scripts": {

@@ -38,7 +38,6 @@ function RESTHandler(options) {
             .filter((file) => {
                 return (/\.(js)$/i).test(file);
             }).map((file) => {
-                console.log('file: ', file);
                 const ctrl = require(controllers + '/' + file);
                 self.processController(ctrl.default ? ctrl.default : ctrl);
             });
@@ -57,10 +56,8 @@ function RESTHandler(options) {
             if(key.match(/^__/)) return;
 
             if(typeof value === 'function') {
-                console.log(apiPath + self.methods[key].params)
                 app[ self.methods[key].method ](apiPath + self.methods[key].params, value);
             } else if(typeof value === 'object') {
-                console.log(apiPath + value.params);
                 app[value.method.toLowerCase()](apiPath + value.params, value.handler);
             }
         });
