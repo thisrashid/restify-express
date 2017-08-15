@@ -54,4 +54,4 @@ function readdirSyncRecursive(baseDir) {
     return fileList;
 };
 
-export default readdirSyncRecursive;
+module.exports = readdirSyncRecursive;
