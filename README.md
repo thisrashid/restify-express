@@ -1,4 +1,4 @@
-# express-rest
+# restify-express
 Middleware to create REST APIs on express server
 
 ## Installation
@@ -56,6 +56,7 @@ module.exports = Post;
 __NAME is required field. If it is not present then entire file will get ignored.
 
 It will create following URLs:
+
   * GET /api/posts : Post.index
   * POST /api/posts : Post.create
   * PUT /api/posts : Post.update
