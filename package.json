@@ -1,0 +1,26 @@
+{
+  "name": "express-rest",
+  "version": "0.0.1",
+  "description": "Middleware to create REST APIs on express server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thisrashid/express-rest.git"
+  },
+  "keywords": [
+    "express",
+    "rest"
+  ],
+  "author": "Rashid Azar",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/thisrashid/express-rest/issues"
+  },
+  "homepage": "https://github.com/thisrashid/express-rest#readme",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
