@@ -1,4 +1,3 @@
-var expect = require('chai').expect;
 var RESTHandler = require('../src/restHandler');
 var supertest = require('supertest');
 var router = require('../app').router;
