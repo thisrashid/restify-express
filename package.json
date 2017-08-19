@@ -4,6 +4,7 @@
   "description": "Middleware to create REST APIs on express server",
   "main": "index.js",
   "scripts": {
+    "prepublish": "mocha",
     "postpublish": "./scripts/postpublish.sh",
     "test": "mocha",
     "dev": "nodemon app"
