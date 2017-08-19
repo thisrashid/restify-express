@@ -1,4 +1,5 @@
-# restify-express
+# restify-express ![Build Status](https://travis-ci.org/thisrashid/restify-express.svg?branch=master) [![Downloads](http://img.shields.io/npm/dm/restify-express.svg)](https://www.npmjs.com/package/restify-express) [![npm version](https://badge.fury.io/js/restify-express.svg)](https://travis-ci.org/thisrashid/restify-express) [![Dependency Status](https://david-dm.org/thisrashid/restify-express/status.svg)](https://david-dm.org/thisrashid/restify-express)
+
 Middleware to create REST APIs on express server
 
 ## Installation
