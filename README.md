@@ -63,3 +63,34 @@ It will create following URLs:
   * DELETE /api/posts : Post.destroy
   * GET /api/posts/:id : Post.read
   * GET /api/posts/:x/:y : Post.custom
+
+## New in 0.0.5
+
+  * We are moving towards convention over configuration. Now __NAME field has become optional in controllers. By default it will consider file name and it can be overridden using __NAME field.
+
+  * we have added two more functions to response object to handle success and error responses:
+    * res.successJson(json)
+    ```javascript
+    return res.successJson({'message': 'This is success message'});
+
+    above code will return below json with http status code 200:
+    {
+        status: "success",
+        data: {
+            message: "This is success message"
+        }
+    }
+    ```
+
+    * res.errorJson(json)
+    ```javascript
+    return res.successJson({'message': 'This is error message'});
+
+    above code will return below json with http status code 400:
+    {
+        status: "error",
+        data: {
+            message: "This is error message"
+        }
+    }
+    ```

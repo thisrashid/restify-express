@@ -1,10 +1,10 @@
 {
   "name": "restify-express",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Middleware to create REST APIs on express server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postpublish": "./scripts/postpublish.sh"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/thisrashid/restify-express/issues"
   },
-  "homepage": "https://github.com/thisrashid/restify-express#readme"
+  "homepage": "https://github.com/thisrashid/restify-express#readme",
+  "devDependencies": {
+    "express": "^4.15.4"
+  }
 }

@@ -39,15 +39,15 @@ function RESTHandler(options) {
                 return (/\.(js)$/i).test(file);
             }).map((file) => {
                 const ctrl = require(controllers + '/' + file);
-                self.processController(ctrl.default ? ctrl.default : ctrl);
+                self.processController(ctrl.default ? ctrl.default : ctrl, file);
             });
     }
 
-    this.processController = function(ctrl) {
+    this.processController = function(ctrl, fileName) {
         var self = this;
         let app = self.options.app;
         if(!ctrl.__NAME) {
-            return;
+            ctrl.__NAME = fileName.replace(/\.js/i, '');
         }
         const apiPath = self.options.base + '/' + ctrl.__NAME;
         
@@ -68,7 +68,25 @@ function RESTHandler(options) {
 
 function restMiddleware(options) {
     let rest = new RESTHandler(options);
-    return function RESTServer(req, res, next) {
+    
+    options.app.use(options.base + '/*', function(req, res, next) {
+        debugger;
+        next();
+    });
+    return function (req, res, next) {
+        res.successJson = function(json) {
+            res.status(200).json({
+                status: 'success',
+                data: json
+            });
+        };
+    
+        res.errorJson = function(json) {
+            res.status(400).json({
+                status: 'error',
+                data: json
+            });
+        }
         next();
     }
 }
