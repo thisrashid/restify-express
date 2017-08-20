@@ -4,15 +4,17 @@ var router = require('../app').router;
 var app = require('../app').app;
 
 describe('restify-express', function() {
-  describe('RESTHandler creation', function() {
-    
-    var restHandler = new RESTHandler({
+  var restHandler;
+  beforeEach(function() {
+    restHandler = new RESTHandler({
       controllers: __dirname + '/controllers',
       app: app,
       router: router,
       base: '/api'
     });
+  });
 
+  describe('RESTHandler creation with all configurations', function() {
     it('/posts/index', function(done) {
       supertest(app)
         .get('/api/posts')
@@ -20,7 +22,10 @@ describe('restify-express', function() {
         .set('Accept', 'application/json')
         .expect('Content-Type', /application\/json/)
         .expect(200, {
-          message: 'This is index page'
+          status: 'success',
+          data: {
+            message: 'This is index page'
+          }
         })
         .end(done)
     });
@@ -82,6 +87,55 @@ describe('restify-express', function() {
         .expect(200, {
           x: 1,
           y: 2
+        })
+        .end(done)
+    });
+
+    it('/posts/errorJson', function(done) {
+      supertest(app)
+        .get('/api/posts/errorJson')
+        .set('User-Agent', 'My cool browser')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /application\/json/)
+        .expect(400, {
+          status: 'error',
+          data: {
+            message: 'res.errorJson()'
+          }
+        })
+        .end(done)
+    });
+  });
+
+  describe('RESTHandler creation with with conventions', function() {
+    
+
+    it('/users/index', function(done) {
+      supertest(app)
+        .get('/api/users')
+        .set('User-Agent', 'My cool browser')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /application\/json/)
+        .expect(200, {
+          status: 'success',
+          data: {
+            message: 'successJson'
+          }
+        })
+        .end(done)
+    });
+
+    it('/users/read', function(done) {
+      supertest(app)
+        .get('/api/users/1')
+        .set('User-Agent', 'My cool browser')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /application\/json/)
+        .expect(400, {
+          status: 'error',
+          data: {
+            message: 'errorJson'
+          }
         })
         .end(done)
     });

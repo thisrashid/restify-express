@@ -4,9 +4,9 @@
   "description": "Middleware to create REST APIs on express server",
   "main": "index.js",
   "scripts": {
-    "prepublish": "mocha",
+    "prepublish": "npm test",
     "postpublish": "./scripts/postpublish.sh",
-    "test": "mocha",
+    "test": "nyc mocha",
     "dev": "nodemon app"
   },
   "repository": {
@@ -28,6 +28,7 @@
     "express": "^4.15.4",
     "mocha": "^3.5.0",
     "nodemon": "^1.11.0",
+    "nyc": "^11.1.0",
     "supertest": "^3.0.0"
   }
 }

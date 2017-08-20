@@ -1,7 +1,14 @@
 var Post = {
   __NAME : 'posts',
+  errorJson: {
+    method: 'get',
+    params: '',
+    handler: function(req, res) {
+        return res.errorJson({message: 'res.errorJson()'});
+    }
+  },
   index : function(req, res) {
-      return res.json({'message' : 'This is index page'});
+      return res.successJson({'message' : 'This is index page'});
   },
   create : function(req, res) {
       return res.json({'message' : 'Create a new post'});
