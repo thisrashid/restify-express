@@ -13,13 +13,16 @@ Middleware to create REST APIs on express server
 ```javascript
 var express = require('express');
 var rest = ('restify-express');
+var router = express.Router();
 
 var app = express();
 
 app.use({
   controllers: __dirname + '/' + 'controllers',
   app: app,
-  base: '/api'
+  base: '/api',
+  router: router,
+  verbose: true
 });
 ```
 
