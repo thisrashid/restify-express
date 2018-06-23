@@ -108,8 +108,6 @@ describe('restify-express', function() {
   });
 
   describe('RESTHandler creation with with conventions', function() {
-    
-
     it('/users/index', function(done) {
       supertest(app)
         .get('/api/users')
@@ -135,6 +133,66 @@ describe('restify-express', function() {
           status: 'error',
           data: {
             message: 'errorJson'
+          }
+        })
+        .end(done)
+    });
+
+    it('/users/json200', function(done) {
+      supertest(app)
+        .get('/api/users/json200')
+        .set('User-Agent', 'My cool browser')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /application\/json/)
+        .expect(200, {
+          status: 'success',
+          data: {
+            message: 'json200'
+          }
+        })
+        .end(done)
+    });
+
+    it('/users/json400', function(done) {
+      supertest(app)
+        .get('/api/users/json400')
+        .set('User-Agent', 'My cool browser')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /application\/json/)
+        .expect(400, {
+          status: 'bad_request',
+          data: {
+            message: 'json400'
+          }
+        })
+        .end(done)
+    });
+
+    it('/users/json403', function(done) {
+      supertest(app)
+        .get('/api/users/json403')
+        .set('User-Agent', 'My cool browser')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /application\/json/)
+        .expect(403, {
+          status: 'unauthorized',
+          data: {
+            message: 'json403'
+          }
+        })
+        .end(done)
+    });
+
+    it('/users/json404', function(done) {
+      supertest(app)
+        .get('/api/users/json404')
+        .set('User-Agent', 'My cool browser')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /application\/json/)
+        .expect(404, {
+          status: 'not_found',
+          data: {
+            message: 'json404'
           }
         })
         .end(done)

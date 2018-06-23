@@ -60,25 +60,43 @@ function RESTHandler(options) {
       ? "/" + ctrl.__NAME
       : self.options.base + "/" + ctrl.__NAME;
 
+    let crudHandlers = [];
     Object.keys(ctrl).forEach(key => {
       var value = ctrl[key];
       if (key.match(/^__/)) return;
 
       if (typeof value === "function") {
-        logger.green('Route: ' + self.methods[key].method + ' ' + apiPath + self.methods[key].params);
-        app[self.methods[key].method](
-          apiPath + self.methods[key].params,
-          middlewares[key] || [],
-          value
-        );
+        // const method = self.methods[key].method,
+        //   mountPath = apiPath + self.methods[key].params;
+        // logger.green('Route: ' + method + ' ' + mountPath);
+        // app[method](
+        //   mountPath,
+        //   middlewares[key] || [],
+        //   value
+        // );
+        crudHandlers.push(key);
       } else if (typeof value === "object") {
-        logger.green('Route: ' + value.method.toLowerCase() + ' ' + apiPath + "/" + key + (value.params ? value.params : ''));
-        app[value.method.toLowerCase()](
-          apiPath + "/" + key + (value.params ? value.params : ''),
+        const method = value.method.toLowerCase(),
+          mountPath = apiPath + "/" + key + (value.params ? value.params : '');
+        logger.green('Route: ' + method + ' ' + mountPath);
+        app[method](
+          mountPath,
           value.middlewares || middlewares[key] || [],
           value.handler
         );
       }
+    });
+
+    crudHandlers.map(key => {
+      let value = ctrl[key];
+      const method = self.methods[key].method,
+        mountPath = apiPath + self.methods[key].params;
+      logger.green('Route: ' + method + ' ' + mountPath);
+      app[method](
+        mountPath,
+        middlewares[key] || [],
+        value
+      );
     });
   };
 

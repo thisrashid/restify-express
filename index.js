@@ -24,6 +24,34 @@ function restMiddleware(options) {
                 data: json
             });
         }
+
+        res.json200 = function(json) {
+            res.status(200).json({
+                status: 'success',
+                data: json
+            });
+        };
+    
+        res.json404 = function(json) {
+            res.status(404).json({
+                status: 'not_found',
+                data: json
+            });
+        };
+    
+        res.json403 = function(json) {
+            res.status(403).json({
+                status: 'unauthorized',
+                data: json
+            });
+        };
+    
+        res.json400 = function(json) {
+            res.status(400).json({
+                status: 'bad_request',
+                data: json
+            });
+        };
         next();
     });
 
