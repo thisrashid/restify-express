@@ -1,4 +1,5 @@
 var wrench = require("./wrench");
+var Logger = require('./logger');
 
 function RESTHandler(options) {
   this.options = options;
@@ -25,6 +26,8 @@ function RESTHandler(options) {
     }
   };
 
+  const logger = Logger(options);
+
   this.loadControllers = function() {
     var self = this;
     var controllers = self.options.controllers;
@@ -35,6 +38,7 @@ function RESTHandler(options) {
       })
       .map(file => {
         const ctrl = require(controllers + "/" + file);
+        logger.yellow('Controller loaded: ' + controllers + "/" + file);
         self.processController(ctrl.default ? ctrl.default : ctrl, file);
       });
     self.options.app.use(self.options.base, self.options.router);
@@ -61,14 +65,16 @@ function RESTHandler(options) {
       if (key.match(/^__/)) return;
 
       if (typeof value === "function") {
+        logger.green('Route: ' + self.methods[key].method + ' ' + apiPath + self.methods[key].params);
         app[self.methods[key].method](
           apiPath + self.methods[key].params,
           middlewares[key] || [],
           value
         );
       } else if (typeof value === "object") {
+        logger.green('Route: ' + value.method.toLowerCase() + ' ' + apiPath + "/" + key + (value.params ? value.params : ''));
         app[value.method.toLowerCase()](
-          apiPath + "/" + key + value.params,
+          apiPath + "/" + key + (value.params ? value.params : ''),
           value.middlewares || middlewares[key] || [],
           value.handler
         );
