@@ -2,10 +2,11 @@ var RESTHandler = require('../src/restHandler');
 var supertest = require('supertest');
 var router = require('../app').router;
 var app = require('../app').app;
+var server = require('../app').server;
 
-describe('restify-express', function() {
+describe('restify-express', function () {
   var restHandler;
-  beforeEach(function() {
+  beforeEach(function () {
     restHandler = new RESTHandler({
       controllers: __dirname + '/controllers',
       app: app,
@@ -14,8 +15,12 @@ describe('restify-express', function() {
     });
   });
 
-  describe('RESTHandler creation with all configurations', function() {
-    it('/posts/index', function(done) {
+  after(function () {
+    server.close();
+  });
+
+  describe('RESTHandler creation with all configurations', function () {
+    it('/posts/index', function (done) {
       supertest(app)
         .get('/api/posts')
         .set('User-Agent', 'My cool browser')
@@ -30,7 +35,7 @@ describe('restify-express', function() {
         .end(done)
     });
 
-    it('/posts/create', function(done) {
+    it('/posts/create', function (done) {
       supertest(app)
         .post('/api/posts')
         .set('User-Agent', 'My cool browser')
@@ -42,7 +47,7 @@ describe('restify-express', function() {
         .end(done)
     });
 
-    it('/posts/update', function(done) {
+    it('/posts/update', function (done) {
       supertest(app)
         .put('/api/posts')
         .set('User-Agent', 'My cool browser')
@@ -54,7 +59,7 @@ describe('restify-express', function() {
         .end(done)
     });
 
-    it('/posts/destroy', function(done) {
+    it('/posts/destroy', function (done) {
       supertest(app)
         .delete('/api/posts')
         .set('User-Agent', 'My cool browser')
@@ -66,7 +71,7 @@ describe('restify-express', function() {
         .end(done)
     });
 
-    it('/posts/read', function(done) {
+    it('/posts/read', function (done) {
       supertest(app)
         .get('/api/posts/1')
         .set('User-Agent', 'My cool browser')
@@ -78,7 +83,7 @@ describe('restify-express', function() {
         .end(done)
     });
 
-    it('/posts/custom', function(done) {
+    it('/posts/custom', function (done) {
       supertest(app)
         .get('/api/posts/custom/1/2')
         .set('User-Agent', 'My cool browser')
@@ -91,7 +96,7 @@ describe('restify-express', function() {
         .end(done)
     });
 
-    it('/posts/errorJson', function(done) {
+    it('/posts/errorJson', function (done) {
       supertest(app)
         .get('/api/posts/errorJson')
         .set('User-Agent', 'My cool browser')
@@ -107,8 +112,8 @@ describe('restify-express', function() {
     });
   });
 
-  describe('RESTHandler creation with with conventions', function() {
-    it('/users/index', function(done) {
+  describe('RESTHandler creation with with conventions', function () {
+    it('/users/index', function (done) {
       supertest(app)
         .get('/api/users')
         .set('User-Agent', 'My cool browser')
@@ -123,7 +128,7 @@ describe('restify-express', function() {
         .end(done)
     });
 
-    it('/users/read', function(done) {
+    it('/users/read', function (done) {
       supertest(app)
         .get('/api/users/1')
         .set('User-Agent', 'My cool browser')
@@ -138,7 +143,7 @@ describe('restify-express', function() {
         .end(done)
     });
 
-    it('/users/json200', function(done) {
+    it('/users/json200', function (done) {
       supertest(app)
         .get('/api/users/json200')
         .set('User-Agent', 'My cool browser')
@@ -153,7 +158,7 @@ describe('restify-express', function() {
         .end(done)
     });
 
-    it('/users/json400', function(done) {
+    it('/users/json400', function (done) {
       supertest(app)
         .get('/api/users/json400')
         .set('User-Agent', 'My cool browser')
@@ -168,7 +173,7 @@ describe('restify-express', function() {
         .end(done)
     });
 
-    it('/users/json403', function(done) {
+    it('/users/json403', function (done) {
       supertest(app)
         .get('/api/users/json403')
         .set('User-Agent', 'My cool browser')
@@ -183,7 +188,7 @@ describe('restify-express', function() {
         .end(done)
     });
 
-    it('/users/json404', function(done) {
+    it('/users/json404', function (done) {
       supertest(app)
         .get('/api/users/json404')
         .set('User-Agent', 'My cool browser')

@@ -14,7 +14,6 @@ app.use(rest({
   base: '/api'
 }));
 
-app.listen(3001);
-
+exports.server = app.listen(3001);
 exports.app = app;
 exports.router = router;
